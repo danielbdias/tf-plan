@@ -97,17 +97,17 @@ class StochasticPlanner(Planner):
         raise NotImplementedError
 
     def _build_init_ops(self):
-        self.init_op = tf.global_variables_initializer()
+        self.init_op = tf.compat.v1.global_variables_initializer()
 
     def _build_initial_state_ops(self):
         with tf.name_scope("initial_state"):
             self.initial_state = tuple(
-                tf.placeholder(t.dtype, t.shape) for t in self.compiler.initial_state()
+                tf.compat.v1.placeholder(t.dtype, t.shape) for t in self.compiler.initial_state()
             )
 
     def _build_sequence_length_ops(self):
         with tf.name_scope("sequence_length"):
-            self.steps_to_go = tf.placeholder(tf.int32, shape=())
+            self.steps_to_go = tf.compat.v1.placeholder(tf.int32, shape=())
             self.sequence_length = tf.tile(
                 tf.reshape(self.steps_to_go, [1]), [self.batch_size]
             )

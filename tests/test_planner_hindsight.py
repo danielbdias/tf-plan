@@ -169,8 +169,8 @@ def test_get_action(planner):
     # pylint: disable=protected-access
     env = rddlgym.make(planner.rddl, mode=rddlgym.GYM)
 
-    with tf.Session(graph=planner.compiler.graph) as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session(graph=planner.compiler.graph) as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         feed_dict = _get_feed_dict(sess, planner, env)
 
         actions_ = planner._get_action(planner.action, feed_dict)
@@ -196,8 +196,8 @@ def test_runner(planner):
 def _session_run(planner, fetches):
     env = rddlgym.make(planner.rddl, mode=rddlgym.GYM)
 
-    with tf.Session(graph=planner.compiler.graph) as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session(graph=planner.compiler.graph) as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         feed_dict = _get_feed_dict(sess, planner, env)
         return sess.run(fetches, feed_dict=feed_dict)
 

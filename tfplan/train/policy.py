@@ -51,7 +51,7 @@ class OpenLoopPolicy:
     def build(self, scope, initializers=None):
         """Builds the policy."""
         with self.graph.as_default():
-            with tf.variable_scope(scope):
+            with tf.compat.v1.variable_scope(scope):
                 self._build_policy_variables(initializers)
 
     def _build_policy_variables(self, initializers=None):
@@ -124,7 +124,7 @@ class OpenLoopPolicy:
         name = fluent.replace("/", "-")
         if initializer is not None:
             initializer = tf.constant_initializer(initializer, dtype=tf.float32)
-        return tf.get_variable(
+        return tf.compat.v1.get_variable(
             name, dtype=tf.float32, shape=shape, initializer=initializer
         )
 

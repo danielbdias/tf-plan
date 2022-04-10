@@ -83,7 +83,7 @@ class Tensorplan(Planner):
             self._build_init_ops()
 
     def _build_init_ops(self):
-        self.init_op = tf.global_variables_initializer()
+        self.init_op = tf.compat.v1.global_variables_initializer()
 
     def _build_policy_ops(self):
         horizon = self.config["horizon"]

@@ -233,7 +233,7 @@ def test_timesteps():
     assert isinstance(timesteps, tf.Tensor)
     assert timesteps.dtype == tf.float32
     assert timesteps.shape == (BATCH_SIZE, HORIZON, 1)
-    with tf.Session() as sess:
+    with tf.compat.v1.Session() as sess:
         timesteps_ = sess.run(timesteps)
         for batch in range(BATCH_SIZE):
             assert np.allclose(timesteps_[batch], timesteps_[0])

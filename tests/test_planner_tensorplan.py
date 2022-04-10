@@ -18,6 +18,7 @@
 
 import numpy as np
 import pytest
+import tensorflow as tf
 
 import rddlgym
 
@@ -28,7 +29,6 @@ from tfplan.train.policy import OpenLoopPolicy
 HORIZON = 20
 BATCH_SIZE = 32
 EPOCHS = 10
-
 
 @pytest.fixture(scope="module", params=["Navigation-v1"])
 def planner(request):

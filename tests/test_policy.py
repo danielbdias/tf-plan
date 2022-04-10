@@ -86,8 +86,8 @@ def test_call_parallel_plans(parallel_plans):
         assert isinstance(action_tensor, tf.Tensor)
         assert action_tensor.shape == (BATCH_SIZE, *policy_var.shape[2:])
 
-    with tf.Session(graph=compiler.graph) as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session(graph=compiler.graph) as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         actions_ = sess.run(action)
 
         for action_ in actions_:
@@ -112,8 +112,8 @@ def test_call_non_parallel_plans(non_parallel_plans):
         assert isinstance(action_tensor, tf.Tensor)
         assert action_tensor.shape == (BATCH_SIZE, *policy_var.shape[2:])
 
-    with tf.Session(graph=compiler.graph) as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session(graph=compiler.graph) as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         actions_ = sess.run(action)
 
         for action_ in actions_:

@@ -45,14 +45,17 @@ class Planner(metaclass=abc.ABCMeta):
         self.compiler = compiler_cls(self.model, batch_size=config["batch_size"])
         self.config = config
 
+        # TODO pensar nesse código aqui
+        #tf.compat.v1.disable_eager_execution()
+
         self.compiler.init()
 
-        config = tf.ConfigProto(
+        config = tf.compat.v1.ConfigProto(
             inter_op_parallelism_threads=1,
             intra_op_parallelism_threads=1,
             log_device_placement=False,
         )
-        self._sess = tf.Session(graph=self.graph, config=config)
+        self._sess = tf.compat.v1.Session(graph=self.graph, config=config)
 
     @property
     def graph(self):

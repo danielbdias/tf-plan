@@ -111,8 +111,8 @@ def test_get_action(planner):
     # pylint: disable=protected-access
     env = rddlgym.make(planner.rddl, mode=rddlgym.GYM)
 
-    with tf.Session(graph=planner.compiler.graph) as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session(graph=planner.compiler.graph) as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         state = env.observation_space.sample()
         batch_state = planner._get_batch_initial_state(state)
         samples = utils.evaluate_noise_samples_as_inputs(

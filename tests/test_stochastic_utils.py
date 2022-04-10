@@ -134,7 +134,7 @@ def test_evaluate_noise_samples_as_inputs(reparameterization):
     samples = reparameterization.samples
     inputs = reparameterization.inputs
 
-    with tf.Session(graph=compiler.graph) as sess:
+    with tf.compat.v1.Session(graph=compiler.graph) as sess:
         noise_inputs = utils.evaluate_noise_samples_as_inputs(sess, samples)
         assert isinstance(noise_inputs, np.ndarray)
         assert list(noise_inputs.shape) == inputs.shape.as_list()

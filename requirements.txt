@@ -1,7 +1,7 @@
-Click
-numpy
-psutil
-tqdm
-tensorflow<2.0.0
-rddlgym
-rddl2tf
+Click==8.1.2
+numpy==1.22.3
+psutil==5.9.0
+tqdm==4.64.0
+tensorflow==2.8.0
+git+https://github.com/danielbdias/rddlgym.git@main#egg=rddlgym
+git+https://github.com/danielbdias/rddl2tf.git@main#egg=rddl2tf

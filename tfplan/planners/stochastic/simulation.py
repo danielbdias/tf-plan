@@ -183,7 +183,7 @@ class Simulator:
                 self.inputs = tf.concat([timesteps, self.noise], axis=2)
 
             with tf.name_scope("trajectory"):
-                outputs, final_state = tf.nn.dynamic_rnn(
+                outputs, final_state = tf.compat.v1.nn.dynamic_rnn(
                     self.cell,
                     self.inputs,
                     initial_state=initial_state,
@@ -204,8 +204,8 @@ class Simulator:
 
     def run(self, trajectory):
         """Evaluates the given `trajectory`."""
-        with tf.Session(graph=self.graph) as sess:
-            sess.run(tf.global_variables_initializer())
+        with tf.compat.v1.Session(graph=self.graph) as sess:
+            sess.run(tf.compat.v1.global_variables_initializer())
 
             noise_inputs = utils.evaluate_noise_samples_as_inputs(sess, self.samples)
             feed_dict = {self.noise: noise_inputs}

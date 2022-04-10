@@ -67,7 +67,7 @@ def encode_noise_samples_as_inputs(samples):
             xi_shape = xi_noise.shape.as_list()[2:]
             xi_size = np.prod(xi_shape)
 
-            xi_noise = tf.placeholder(
+            xi_noise = tf.compat.v1.placeholder(
                 xi_noise.dtype, shape=(batch_size, horizon, xi_size)
             )
             xi_placeholders.append(xi_noise)
