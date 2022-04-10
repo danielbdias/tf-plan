@@ -102,7 +102,7 @@ def test_build_trajectory_ops(planner):
 
     with planner.graph.as_default():
         last_reward = tf.reduce_mean(planner.trajectory.rewards[:, -1, 0])
-        base_policy_vars = tf.trainable_variables(scope="base_policy")
+        base_policy_vars = tf.compat.v1.trainable_variables(scope="base_policy")
         base_policy_grads = tf.gradients(last_reward, base_policy_vars)
 
         base_policy_grads_ = _session_run(planner, base_policy_grads)
@@ -129,12 +129,12 @@ def test_optimization_ops(planner):
 
         grads_and_vars = planner.grads_and_vars
         assert isinstance(grads_and_vars, list)
-        assert len(grads_and_vars) == len(tf.trainable_variables())
+        assert len(grads_and_vars) == len(tf.compat.v1.trainable_variables())
 
-        for variable in tf.trainable_variables(scope="base_policy"):
+        for variable in tf.compat.v1.trainable_variables(scope="base_policy"):
             assert variable.shape[:2] == [1, 1]
 
-        for variable in tf.trainable_variables(scope="scenario_policy"):
+        for variable in tf.compat.v1.trainable_variables(scope="scenario_policy"):
             assert variable.shape[:2] == [BATCH_SIZE, HORIZON - 1]
 
     grads_and_vars_ = _session_run(planner, grads_and_vars)

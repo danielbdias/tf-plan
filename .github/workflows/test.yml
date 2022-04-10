@@ -1,0 +1,26 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+          architecture: 'x64'
+      - run: pip install -r requirements.txt
+      - run: pip install pandas==1.4.2 matplotlib==3.5.1 gym==0.23.1 pytest==7.1.1
+      - run: pip install git+https://github.com/danielbdias/rddl2tf.git@main
+      - run: pip install git+https://github.com/danielbdias/rddlgym.git@main
+      - run: pytest tests/*.py -sv --disable-warnings
+      # TODO add coverage
