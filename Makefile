@@ -8,6 +8,9 @@ docs:
 test:
 	pytest tests/*.py -sv --disable-warnings 2>/dev/null
 
+test/quiet:
+	pytest tests/*.py --quiet --disable-warnings 2>/dev/null
+
 upload:
 	[ -e "dist/" ] && rm -Rf dist/
 	python3 setup.py sdist bdist_wheel

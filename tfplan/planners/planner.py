@@ -45,10 +45,6 @@ class Planner(metaclass=abc.ABCMeta):
         self.compiler = compiler_cls(self.model, batch_size=config["batch_size"])
         self.config = config
 
-        # as this code was created using TF 1.0, we need to use disable eager execution and v2 behavior
-        tf.compat.v1.disable_eager_execution()
-        tf.compat.v1.disable_v2_behavior()
-
         self.compiler.init()
 
         config = tf.compat.v1.ConfigProto(
