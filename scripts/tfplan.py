@@ -27,7 +27,6 @@ import tuneconfig
 
 import tfplan
 
-
 @click.command()
 @click.argument(
     "planner", type=click.Choice(["tensorplan", "straightline", "hindsight"])
